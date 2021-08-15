@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:my_app/screen/home/mobx/battery.dart';
 
 import '../mobx/counter.dart';
 
 final counter = Counter();
+final battery = Battery();
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -38,6 +42,14 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: [
+          Observer(
+            builder: (_) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: battery.image,
+            ),
+          ),
+        ],
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -71,10 +83,26 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: counter.increment,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: Container(
+        height: 120.0,
+        width: 120.0,
+        color: Colors.blue[50],
+        child: Column(
+          children: <Widget>[
+            FloatingActionButton(
+              onPressed: counter.increment,
+              tooltip: 'Increment',
+              child: Icon(Icons.add),
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                battery.set(Random().nextInt(4) + 1);
+              },
+              tooltip: 'Increment',
+              child: Icon(Icons.battery_saver),
+            ),
+          ],
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
