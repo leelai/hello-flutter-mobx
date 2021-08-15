@@ -1,20 +1,20 @@
-# my_app
+# Flutter Mobx Counter
 
 A Mobx Counter app.
 
 ## Getting Started
 
-Generate counter.g.dart
+### Generate counter.g.dart
 ```
 flutter packages pub run build_runner build
 ```
-Run app
+### Run app
 
 ```
 flutter run
 ```
 
-Develop purpose
+### Keep watching changes
 
 we need to watch counter.dart to generate counter.g.dart automatically
 
